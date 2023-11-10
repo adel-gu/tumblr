@@ -2,6 +2,16 @@
   <h1>Make something</h1>
 
   <%= form_with model: @post do |form| %>
+    <% if @post.errors.any? %>
+      <div id="errors">
+        <h2><%= pluralize(@post.errors.count, "error") %> stopped this post from saving</h2>
+        <ul>
+          <%= @post.errors.full_messages.each do |msg|%>
+            <li><%= msg %></li>
+          <%end%>
+        </ul>
+      </div>
+    <%end%>
     <div>
       <%= form.label :title %><br>
       <%= form.text_field :title %>
@@ -15,5 +25,6 @@
     <div>
       <%= form.submit %>
     </div>
+
   <% end %>
 </div>
